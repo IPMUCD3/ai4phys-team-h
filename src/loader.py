@@ -45,8 +45,11 @@ class ImageToImageDataset(Dataset):
         if dtype is None:
             dtype = np.float32
 
-        self.imgs1 = torch.from_numpy(np.load(imgs1_path).astype(dtype).reshape(1000, 15, 256, 256))
-        self.imgs2 = torch.from_numpy(np.load(imgs2_path).astype(dtype).reshape(1000, 15, 256, 256))
+        imgs1 = torch.from_numpy(np.load(imgs1_path).astype(dtype).reshape(1000, 15, 256, 256))
+        imgs2 = torch.from_numpy(np.load(imgs2_path).astype(dtype).reshape(1000, 15, 256, 256))
+
+        self.imgs1 = imgs1[:, 4, :, :]
+        self.imgs2 = imgs2[:, 4, :, :]
 
         if crop_size is not None:
             self.imgs1 = v2.functional.center_crop(self.imgs1, crop_size)

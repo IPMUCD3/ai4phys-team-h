@@ -48,6 +48,7 @@ class ImageToImageDataset(Dataset):
         imgs1 = torch.from_numpy(np.load(imgs1_path).astype(dtype).reshape(1000, 15, 256, 256))
         imgs2 = torch.from_numpy(np.load(imgs2_path).astype(dtype).reshape(1000, 15, 256, 256))
 
+        # we select 4 here, it can be any value from 0 to 14
         self.imgs1 = imgs1[:, 4, :, :]
         self.imgs2 = imgs2[:, 4, :, :]
 
